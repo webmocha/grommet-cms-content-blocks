@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Box from 'grommet/components/Box';
 import Form from 'grommet/components/Form';
 import FormFields from 'grommet/components/FormFields';
@@ -12,8 +13,8 @@ export class RelatedContentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: props.data || [{ href: "", title: "", content: "" }],
-      label: props.label || "Related Content"
+      data: props.data || [{ href: '', title: '', content: '' }],
+      label: props.label || 'Related Content',
     };
 
     this.onDataChange = this.onDataChange.bind(this);
@@ -22,23 +23,23 @@ export class RelatedContentForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onDataChange(e,i) {
-    const { name , value } = e.target;
+  onDataChange(e, i) {
+    const { name, value } = e.target;
     const onchangeVal = [...this.state.data];
     onchangeVal[i][name] = value;
-    this.setState({data: onchangeVal});
+    this.setState({ data: onchangeVal });
     if (this.props.onChange) {
       this.props.onChange(e);
     }
   }
 
   onAdd() {
-    this.setState({data: [...this.state.data, { href: "", title: "", content: "" }]});
+    this.setState({ data: [...this.state.data, { href: '', title: '', content: '' }] });
   }
 
   onDelete(i) {
     const deleteVal = [...this.state.data];
-    deleteVal.splice(i,1)
+    deleteVal.splice(i, 1);
     this.setState({ data: deleteVal });
   }
 
@@ -57,7 +58,7 @@ export class RelatedContentForm extends Component {
             <input
               name="label"
               value={label}
-              onChange={(e) => this.onDataChange(e, 0)}
+              onChange={e => this.onDataChange(e, 0)}
               placeholder="label"
             />
           </FormField>
@@ -72,7 +73,7 @@ export class RelatedContentForm extends Component {
                       <input
                         name="href"
                         value={val.href}
-                        onChange={(e) => this.onDataChange(e, i)}
+                        onChange={e => this.onDataChange(e, i)}
                         placeholder="href"
                       />
                     </FormField>
@@ -84,7 +85,7 @@ export class RelatedContentForm extends Component {
                       <input
                         name="title"
                         value={val.title}
-                        onChange={(e) => this.onDataChange(e, i)}
+                        onChange={e => this.onDataChange(e, i)}
                         placeholder="Title"
                       />
                     </FormField>
@@ -96,7 +97,7 @@ export class RelatedContentForm extends Component {
                       <input
                         name="content"
                         value={val.content}
-                        onChange={(e) => this.onDataChange(e, i)}
+                        onChange={e => this.onDataChange(e, i)}
                         placeholder="Content"
                       />
                     </FormField>
@@ -107,7 +108,7 @@ export class RelatedContentForm extends Component {
                     <Button icon={<AddIcon />} onClick={this.onAdd} pad="small">
                       Add
                     </Button>
-                    <Box pad="small"></Box>
+                    <Box pad="small" />
                     {data.length > 1 && (
                       <Button
                         icon={<TrashIcon />}
@@ -136,11 +137,12 @@ export class RelatedContentForm extends Component {
 }
 
 RelatedContentForm.propTypes = {
-  data: PropTypes.array,
-  onDataChange: PropTypes.func,
-  onAdd: PropTypes.func,
-  onDelete: PropTypes.func,
-  onSubmit: PropTypes.func,
+  label: PropTypes.string,
+  data: PropTypes.arrayOf({
+    href: PropTypes.string,
+    title: PropTypes.string,
+    content: PropTypes.string,
+  }),
 };
 
 export default RelatedContentForm;

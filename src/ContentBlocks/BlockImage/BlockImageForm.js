@@ -153,11 +153,6 @@ BlockImageForm.propTypes = {
   url: PropTypes.string,
   image: PropTypes.object, // eslint-disable-line
   link: PropTypes.string,
-  borderColor: PropTypes.oneOf([
-    'none',
-    'red',
-    'green',
-  ]),
 };
 
 export default BlockImageForm;

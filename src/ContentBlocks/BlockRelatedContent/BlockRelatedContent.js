@@ -1,7 +1,8 @@
-import React, { PropTypes } from "react";
-import Box from "grommet/components/Box";
-import Paragraph from "grommet/components/Paragraph";
-import { StyledBox, StyledAnchor, StyledHeading } from "./styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Box from 'grommet/components/Box';
+import Paragraph from 'grommet/components/Paragraph';
+import { StyledBox, StyledAnchor, StyledHeading } from './styles';
 
 export default function BlockRelatedContent({ data, label }) {
   return (
@@ -16,7 +17,7 @@ export default function BlockRelatedContent({ data, label }) {
               <Paragraph margin="none">
                 <b>{title}</b>
               </Paragraph>
-              <Paragraph margin="none">{content}</Paragraph> 
+              <Paragraph margin="none">{content}</Paragraph>
             </StyledAnchor>
           </StyledBox>
         ))}
@@ -25,5 +26,10 @@ export default function BlockRelatedContent({ data, label }) {
 }
 
 BlockRelatedContent.propTypes = {
-  content: PropTypes.string,
+  label: PropTypes.string,
+  data: PropTypes.arrayOf({
+    href: PropTypes.string,
+    title: PropTypes.string,
+    content: PropTypes.string,
+  }),
 };

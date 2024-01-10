@@ -1,5 +1,6 @@
-import React, { PropTypes } from "react";
-import Headline from "grommet/components/Headline";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Headline from 'grommet/components/Headline';
 
 export default function BlockRelatedContentPreview({ content }) {
   return <Headline>{content}</Headline>;

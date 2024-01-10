@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Box from 'grommet/components/Box';
 
 const BlockIframe = ({ srcUrl, height }) => (
