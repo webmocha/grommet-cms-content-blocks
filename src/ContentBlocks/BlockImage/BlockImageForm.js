@@ -13,16 +13,16 @@ export class BlockImageForm extends Component {
     super(props);
     this.state = {
       image: props.image || '',
+      link: props.link || '',
       content: props.content || '',
       alt: props.alt || '',
     };
-
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.validateForm = this.validateForm.bind(this);
   }
 
-  componentWillReceiveProps({ image, url }) {
+  componentWillReceiveProps({ image, url, link }) {
     if (image && image !== this.state.image) {
       this.setState({
         image,
@@ -31,6 +31,11 @@ export class BlockImageForm extends Component {
     if (url !== this.props.url && this.props.url !== '') {
       this.setState({
         image: `${this.props.url}`,
+      });
+    }
+    if (link && link !== this.props.link) {
+      this.setState({
+        link,
       });
     }
   }
@@ -64,7 +69,7 @@ export class BlockImageForm extends Component {
   }
 
   render() {
-    const { image, content, alt } = this.state;
+    const { image, content, alt, borderColor, link } = this.state;
     const { children } = this.props;
     const submit = (this.validateForm(this.state))
       ? this.onSubmit
@@ -105,6 +110,25 @@ export class BlockImageForm extends Component {
                   onChange={this.onChange}
                 />
               </FormField>
+              <FormField label="Border Color" htmlFor="borderColor">
+                <Select
+                  id="borderColor"
+                  name="borderColor"
+                  inline={false}
+                  options={['none', 'red', 'green']}
+                  value={borderColor}
+                  onChange={this.onChange}
+                />
+              </FormField>
+              <FormField label="Image Link" htmlFor="link">
+                <input
+                  id="link"
+                  name="link"
+                  type="text"
+                  value={link || ''}
+                  onChange={this.onChange}
+                />
+              </FormField>
               {children && children}
             </fieldset>
             <Button
@@ -128,6 +152,12 @@ BlockImageForm.propTypes = {
   content: PropTypes.string,
   url: PropTypes.string,
   image: PropTypes.object, // eslint-disable-line
+  link: PropTypes.string,
+  borderColor: PropTypes.oneOf([
+    'none',
+    'red',
+    'green',
+  ]),
 };
 
 export default BlockImageForm;

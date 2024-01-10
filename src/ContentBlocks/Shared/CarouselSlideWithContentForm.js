@@ -6,6 +6,7 @@ import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
 import Box from 'grommet/components/Box';
 import RadioButton from 'grommet/components/RadioButton';
+import DateTime from 'grommet/components/DateTime';
 import { MarkdownHelpButton } from '../Shared';
 import ImagePreview from '../Shared/ImagePreview';
 
@@ -25,12 +26,14 @@ class CarouselSlideWithContentForm extends Component {
       image: props.data ? props.data.image : '',
       content: props.data ? props.data.content : '',
       button: props.data ? props.data.button : { path: '', label: '' },
+      update: props.data ? props.data.update : { date: '', description: '' },
       imageSize: props.imageSize ? props.imageSize : 'Full',
       justification: (props.data && props.data.justification) ? props.data.justification : 'left',
       color: (props.data && props.data.color) ? props.data.color : 'black',
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
     this.onChangeJustification = this.onChangeJustification.bind(this);
     this.onChangeColor = this.onChangeColor.bind(this);
     this.propsToState = this.propsToState.bind(this);
@@ -86,12 +89,28 @@ class CarouselSlideWithContentForm extends Component {
     });
   }
 
+  onDateChange(value) {
+    this.setState({
+      update: {
+        ...this.state.update,
+        date: value,
+      },
+    });
+  }
+
   onChange(e) {
     const { target, option } = e;
     const key = target.id;
     const val = option || target.value;
 
-    if (key === 'label' || key === 'path') {
+    if (key === 'description') {
+      this.setState({
+        update: {
+          ...this.state.update,
+          [key]: val,
+        },
+      });
+    } else if (key === 'label' || key === 'path') {
       this.setState({
         button: {
           ...this.state.button,
@@ -113,6 +132,7 @@ class CarouselSlideWithContentForm extends Component {
       justification: props.data ? props.data.justification : 'left',
       content: props.data ? props.data.content : '',
       button: props.data ? props.data.button : { path: '', label: '' },
+      update: props.data ? props.data.update : { date: '', description: '' },
     });
   }
 
@@ -121,7 +141,7 @@ class CarouselSlideWithContentForm extends Component {
       ? this.props.onSubmit
       : undefined;
     const { assetNode } = this.props;
-    const { image, content, button, justification, color } = this.state;
+    const { image, content, button, update, justification, color } = this.state;
 
     return (
       <Form compact={false} onSubmit={onSubmit}>
@@ -195,6 +215,23 @@ class CarouselSlideWithContentForm extends Component {
               </FormField>
             </fieldset>
             <fieldset>
+              <legend>Update Card</legend>
+              <FormField label="Date" htmlFor="date">
+                <DateTime id="date" name="date" format="MMM DD, YYYY" onChange={this.onDateChange} value={update ? update.date : ''} />
+              </FormField>
+              <FormField label="Description" htmlFor="description">
+                <textarea
+                  id="description"
+                  name="description"
+                  type="text"
+                  value={update ? update.description : ''}
+                  onChange={this.onChange}
+                  maxLength={80}
+                  rows="2"
+                />
+              </FormField>
+            </fieldset>
+            <fieldset>
               <legend>
                 Button
               </legend>
@@ -246,6 +283,10 @@ CarouselSlideWithContentForm.propTypes = {
     button: PropTypes.shape({
       path: PropTypes.string,
       label: PropTypes.string,
+    }),
+    update: PropTypes.shape({
+      date: PropTypes.string.isRequired,
+      description: PropTypes.isRequired,
     }),
     justification: PropTypes.string,
     color: PropTypes.string,
