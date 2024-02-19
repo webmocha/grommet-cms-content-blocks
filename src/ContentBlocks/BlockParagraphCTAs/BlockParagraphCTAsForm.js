@@ -194,7 +194,6 @@ class BlockParagraphCTAsForm extends Component {
   render() {
     const { assetNode } = this.props;
     const { activeSlideIndex, content, paragraphSize } = this.state;
-
     const buttonForm = (
       <BlockButtonForm
         pad={false}
