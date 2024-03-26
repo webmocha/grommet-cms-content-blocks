@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Button from 'grommet/components/Button';
+import Select from 'grommet/components/Select';
 import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
@@ -8,6 +9,7 @@ import RadioButton from 'grommet/components/RadioButton';
 import DateTime from 'grommet/components/DateTime';
 import { MarkdownHelpButton } from '../Shared';
 import ImagePreview from '../Shared/ImagePreview';
+import iconMap from '../BlockButton/iconMap';
 
 class CarouselSlideWithContentForm extends Component {
   static validate(data) {
@@ -24,7 +26,7 @@ class CarouselSlideWithContentForm extends Component {
     this.state = {
       image: props.data ? props.data.image : '',
       content: props.data ? props.data.content : '',
-      button: props.data ? props.data.button : { path: '', label: '' },
+      button: props.data ? props.data.button : { path: '', label: '', icon: props.data.button.icon || 'primary' },
       update: props.data ? props.data.update : { date: '', description: '' },
       imageSize: props.imageSize ? props.imageSize : 'Full',
       justification: (props.data && props.data.justification) ? props.data.justification : 'left',
@@ -109,7 +111,7 @@ class CarouselSlideWithContentForm extends Component {
           [key]: val,
         },
       });
-    } else if (key === 'label' || key === 'path') {
+    } else if (key === 'label' || key === 'path' || key === 'icon') {
       this.setState({
         button: {
           ...this.state.button,
@@ -130,7 +132,7 @@ class CarouselSlideWithContentForm extends Component {
       color: props.data ? props.data.color : 'black',
       justification: props.data ? props.data.justification : 'left',
       content: props.data ? props.data.content : '',
-      button: props.data ? props.data.button : { path: '', label: '' },
+      button: props.data ? props.data.button : { path: '', label: '', icon: '',},
       update: props.data ? props.data.update : { date: '', description: '' },
     });
   }
@@ -234,7 +236,7 @@ class CarouselSlideWithContentForm extends Component {
               <legend>
                 Button
               </legend>
-              <FormField label="Button Label label label" htmlFor="label">
+              <FormField label="Button Label" htmlFor="label">
                 <input
                   id="label"
                   name="label"
@@ -252,6 +254,18 @@ class CarouselSlideWithContentForm extends Component {
                   onChange={this.onChange}
                 />
               </FormField>
+              <FormField
+                  label="Button Icon"
+                  htmlFor="icon"
+                >
+                  <Select
+                    onChange={this.onChange}
+                    value={button ? button.icon : ''}
+                    options={Object.keys(iconMap)}
+                    name="icon"
+                    id="icon"
+                  />
+                </FormField>
             </fieldset>
             {assetNode && React.cloneElement(
               assetNode,
