@@ -270,7 +270,7 @@ class CarouselSlideWithContentForm extends Component {
               <FormField>
                 <CheckBox
                   onChange={this.onChange}
-                  checked={newTab}
+                  checked={button? button.newTab : false}
                   id="newTab"
                   toggle
                   reverse
