@@ -4,6 +4,7 @@ import Select from 'grommet/components/Select';
 import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
+import CheckBox from "grommet/components/CheckBox";
 import Box from 'grommet/components/Box';
 import RadioButton from 'grommet/components/RadioButton';
 import DateTime from 'grommet/components/DateTime';
@@ -26,7 +27,7 @@ class CarouselSlideWithContentForm extends Component {
     this.state = {
       image: props.data ? props.data.image : '',
       content: props.data ? props.data.content : '',
-      button: props.data ? props.data.button : { path: '', label: '', icon: props.data.button.icon || 'primary' },
+      button: props.data ? props.data.button : { path: '', label: '', icon: props.data.button.icon || 'primary', newTab: props.data.button.newTab || false },
       update: props.data ? props.data.update : { date: '', description: '' },
       imageSize: props.imageSize ? props.imageSize : 'Full',
       justification: (props.data && props.data.justification) ? props.data.justification : 'left',
@@ -111,7 +112,7 @@ class CarouselSlideWithContentForm extends Component {
           [key]: val,
         },
       });
-    } else if (key === 'label' || key === 'path' || key === 'icon') {
+    } else if (key === 'label' || key === 'path' || key === 'icon' || key === "newTab") {
       this.setState({
         button: {
           ...this.state.button,
@@ -132,7 +133,7 @@ class CarouselSlideWithContentForm extends Component {
       color: props.data ? props.data.color : 'black',
       justification: props.data ? props.data.justification : 'left',
       content: props.data ? props.data.content : '',
-      button: props.data ? props.data.button : { path: '', label: '', icon: '',},
+      button: props.data ? props.data.button : { path: '', label: '', icon: '', newTab: false },
       update: props.data ? props.data.update : { date: '', description: '' },
     });
   }
@@ -266,6 +267,16 @@ class CarouselSlideWithContentForm extends Component {
                     id="icon"
                   />
                 </FormField>
+              <FormField>
+                <CheckBox
+                  onChange={this.onChange}
+                  checked={button? button.newTab : false}
+                  id="newTab"
+                  toggle
+                  reverse
+                  label="New Browser Tab?"
+                />
+              </FormField>
             </fieldset>
             {assetNode && React.cloneElement(
               assetNode,
