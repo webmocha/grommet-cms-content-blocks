@@ -116,7 +116,7 @@ class CarouselSlideWithContentForm extends Component {
       this.setState({
         button: {
           ...this.state.button,
-          [`${key}`]: val,
+          [`${key}`]: target.type === "checkbox" ? target.checked : val,
         },
       });
     } else {
