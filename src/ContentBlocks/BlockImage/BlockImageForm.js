@@ -78,7 +78,9 @@ export class BlockImageForm extends Component {
 
   validateForm() {
     const { image } = this.state;
-    return image !== '';
+    if (image !== '') { return true; }
+
+    return false;
   }
 
   render() {
