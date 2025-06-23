@@ -4,12 +4,20 @@ import { BlockParagraph } from '../BlockParagraph';
 import colorMap from './colorMap';
 import Div from './div';
 import Image from './image';
+import IconPicker from '../BlockButton/iconPicker';
+import IconSpan from './iconSpan';
 
-export default function BlockImage({ content, alt, image, borderColor, link }) {
+
+export default function BlockImage({ content, alt, image, borderColor, link, title, icon }) {
   const unescapedContent = unescape(content || '');
   const caption = (unescapedContent && unescapedContent !== '')
     ? <BlockParagraph content={content} />
     : '';
+  const heading = (icon && icon !== 'none')
+    ? (<IconSpan color={colorMap[icon]}>
+      <IconPicker icon={icon} />
+      </IconSpan>)
+    : (title ? <BlockParagraph content={title} /> : '')
   const path = image && image.path ? image.path : '';
   const color = (borderColor && borderColor !== 'none') ? colorMap[borderColor] : '';
   if (path === '') {
@@ -17,6 +25,7 @@ export default function BlockImage({ content, alt, image, borderColor, link }) {
   }
   return (
     <Div>
+    <div style={{ marginBottom: 24 }}>{heading}</div>
       {
         link ?
           <a href={link} target="_blank" rel="noopener noreferrer">
@@ -51,5 +60,7 @@ BlockImage.propTypes = {
     'red',
     'green',
   ]),
+  title: PropTypes.string,
+  icon: PropTypes.string,
 };
 

@@ -11,6 +11,9 @@ import DocumentDownloadIcon from 'grommet/components/icons/base/DocumentDownload
 import PrintIcon from 'grommet/components/icons/base/Print';
 import CirclePlayIcon from 'grommet/components/icons/base/CirclePlay';
 import DownloadIcon from 'grommet/components/icons/base/Download';
+import FormCheckmarkIcon from 'grommet/components/icons/base/FormCheckmark';
+import FormSubtractIcon from 'grommet/components/icons/base/FormSubtract';
+import FormCloseIcon from 'grommet/components/icons/base/FormClose';
 
 export default {
   primary: <LinkNextIcon />,
@@ -24,4 +27,7 @@ export default {
   download: <DownloadIcon />,
   play: <CirclePlayIcon />,
   print: <PrintIcon />,
+  'do': <FormCheckmarkIcon />,
+  'limitedUse': <FormSubtractIcon />,
+  'doNot': <FormCloseIcon />,
 };

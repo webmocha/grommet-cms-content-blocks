@@ -16,27 +16,30 @@ export class BlockImageForm extends Component {
       content: props.content || '',
       alt: props.alt || '',
       borderColor: props.borderColor || 'none',
+      title: props.title || '',
+      icon: props.icon || 'none',
+      heading: props.title ? 'title' : (props.icon && props.icon !== 'none' ? 'icon' : 'none'),
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.validateForm = this.validateForm.bind(this);
   }
 
-  componentWillReceiveProps({ image, url, link }) {
+  componentWillReceiveProps({ image, url, link, title, icon }) {
     if (image && image !== this.state.image) {
-      this.setState({
-        image,
-      });
+      this.setState({ image });
     }
     if (url !== this.props.url && this.props.url !== '') {
-      this.setState({
-        image: `${this.props.url}`,
-      });
+      this.setState({ image: `${this.props.url}` });
     }
     if (link && link !== this.props.link) {
-      this.setState({
-        link,
-      });
+      this.setState({ link });
+    }
+    if (title && title !== this.props.title) {
+      this.setState({ title });
+    }
+    if (icon && icon !== this.props.icon) {
+      this.setState({ icon });
     }
   }
 
@@ -47,6 +50,18 @@ export class BlockImageForm extends Component {
 
     const obj = {};
     obj[key] = val;
+    
+    if(key === 'heading') {
+      if (val === 'title') {
+        obj.icon = 'none';
+      } else if (val === 'icon') {
+        obj.title = '';
+      } else {
+        obj.title = '';
+        obj.icon = 'none';
+      }
+    }
+
 
     this.setState(obj);
     if (this.props.onChange) {
@@ -69,11 +84,9 @@ export class BlockImageForm extends Component {
   }
 
   render() {
-    const { image, content, alt, borderColor, link } = this.state;
+    const { image, content, alt, borderColor, link, title, icon, heading } = this.state;
     const { children } = this.props;
-    const submit = (this.validateForm(this.state))
-      ? this.onSubmit
-      : undefined;
+    const submit = this.validateForm() ? this.onSubmit : undefined;
 
     return (
       <Box colorIndex="light-2" pad="medium">
@@ -81,6 +94,39 @@ export class BlockImageForm extends Component {
         <Form compact={false} onSubmit={submit}>
           <FormFields>
             <fieldset>
+              <FormField label="Heading" htmlFor="heading">
+                <Select
+                  id="heading"
+                  name="heading"
+                  inline={false}
+                  options={['none', 'title', 'icon']}
+                  value={heading}
+                  onChange={this.onChange}
+                />
+              </FormField>
+              {heading === 'title' && (
+                <FormField label="Title" htmlFor="title">
+                  <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    value={title || ''}
+                    onChange={this.onChange}
+                  />
+                </FormField>
+              )}
+              {heading === 'icon' && (
+                <FormField label="Icon" htmlFor="icon">
+                  <Select
+                    id="icon"
+                    name="icon"
+                    inline={false}
+                    options={['do', 'doNot', 'limitedUse']}
+                    value={icon === 'none' ? '' : icon}
+                    onChange={this.onChange}
+                  />
+                </FormField>
+              )}
               <FormField label="Content" htmlFor="content">
                 <textarea
                   autoFocus
@@ -153,11 +199,9 @@ BlockImageForm.propTypes = {
   url: PropTypes.string,
   image: PropTypes.object, // eslint-disable-line
   link: PropTypes.string,
-  borderColor: PropTypes.oneOf([
-    'none',
-    'red',
-    'green',
-  ]),
+  borderColor: PropTypes.oneOf(['none', 'red', 'green']),
+  title: PropTypes.string,
+  icon: PropTypes.string,
 };
 
 export default BlockImageForm;
