@@ -27,29 +27,31 @@ export default class BlockHero extends Component {
         style={{ backgroundSize: 'cover', backgroundPosition: 'center', width: '100vw' }}
         texture={imagePath}
       >
-        <Box
-          pad="large"
-          align="center"
-          justify="center"
-          colorIndex="grey-4-a"
-        >
-          <Headline align="center" size="large" strong>
-            {headline || ''}
-          </Headline>
-          <Markdown
-            content={parsedContent}
-            components={{
-              p: { props: { size: 'large', margin: 'small', align: 'center' } },
-              h2: { props: { strong: true, align: 'center' } },
-            }}
-          />
-          {button && button.label &&
-            <Button
-              primary
-              {...button}
+        {(headline || parsedContent || (button && button.label)) && (
+          <Box
+            pad="large"
+            align="center"
+            justify="center"
+            colorIndex="grey-4-a"
+          >
+            <Headline align="center" size="large" strong>
+              {headline || ''}
+            </Headline>
+            <Markdown
+              content={parsedContent}
+              components={{
+                p: { props: { size: 'large', margin: 'small', align: 'center' } },
+                h2: { props: { strong: true, align: 'center' } },
+              }}
             />
-          }
-        </Box>
+            {button && button.label &&
+              <Button
+                primary
+                {...button}
+              />
+            }
+          </Box>
+        )}
       </Box>
     );
   }
