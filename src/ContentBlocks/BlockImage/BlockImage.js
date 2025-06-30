@@ -25,7 +25,7 @@ export default function BlockImage({ content, alt, image, borderColor, link, tit
   }
   return (
     <Div>
-    <div style={{ marginBottom: 24 }}>{heading}</div>
+      {heading ? <div style={{ marginBottom: 24, height: '32px' }}>{heading}</div> : null}
       {
         link ?
           <a href={link} target="_blank" rel="noopener noreferrer">
