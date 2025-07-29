@@ -14,6 +14,8 @@ export class ParagraphForm extends Component {
       content: props.content || '',
       paragraphSize: props.paragraphSize || 'medium',
       align: props.align || 'start',
+      scrollable: props.scrollable || "no",
+      scrollableHeight: props.scrollableHeight || "medium",
     };
 
     this.onChange = this.onChange.bind(this);
@@ -41,7 +43,7 @@ export class ParagraphForm extends Component {
   }
 
   render() {
-    const { content, align, paragraphSize } = this.state;
+    const { content, align, scrollable, scrollableHeight, paragraphSize } = this.state;
 
     return (
       <Box colorIndex="light-2" pad="medium">
@@ -55,6 +57,14 @@ export class ParagraphForm extends Component {
                   value={content} onChange={this.onChange} rows="10"
                 />
               </FormField>
+              <FormField label="Scrollable" htmlFor="scrollable">
+                <Select value={scrollable || "no"} onChange={this.onChange} options={['no', 'yes']} name="scrollable" id="scrollable" />
+              </FormField>
+              {scrollable === "yes" && (
+                <FormField label="Scrollable Height" htmlFor="scrollableHeight">
+                  <Select value={scrollableHeight || "medium"} onChange={this.onChange} options={['small', 'medium', 'large']} name="scrollableHeight" id="scrollableHeight" />
+                </FormField>
+              )}
               <FormField
                 label="Align Content"
                 htmlFor="align"
