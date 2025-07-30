@@ -47,7 +47,7 @@ export default function BlockParagraph({
     );
   }
   return (
-    <Box>
+    <Box direction="row" gap="small">
       {iconElement}
       <Markdown
         content={markdownContent}
