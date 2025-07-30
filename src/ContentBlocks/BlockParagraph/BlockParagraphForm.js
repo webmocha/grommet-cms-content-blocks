@@ -13,6 +13,7 @@ export class ParagraphForm extends Component {
     this.state = {
       content: props.content || '',
       paragraphSize: props.paragraphSize || 'medium',
+      paragraphColor: props.paragraphColor || "normal",
       align: props.align || 'start',
       scrollable: props.scrollable || "no",
       scrollableHeight: props.scrollableHeight || "medium",
@@ -43,7 +44,7 @@ export class ParagraphForm extends Component {
   }
 
   render() {
-    const { content, align, scrollable, scrollableHeight, paragraphSize } = this.state;
+    const { content, align, scrollable, scrollableHeight, paragraphSize, paragraphColor } = this.state;
 
     return (
       <Box colorIndex="light-2" pad="medium">
@@ -95,6 +96,22 @@ export class ParagraphForm extends Component {
                   ]}
                   name="paragraphSize"
                   id="paragraphSize"
+                />
+              </FormField>
+              <FormField
+                label="Paragraph Color"
+                htmlFor="paragraphColor"
+              >
+                <Select
+                  onChange={this.onChange}
+                  value={paragraphColor || 'normal'}
+                  options={[
+                    'light',
+                    'normal',
+                    'dark',
+                  ]}
+                  name="paragraphColor"
+                  id="paragraphColor"
                 />
               </FormField>
             </fieldset>
