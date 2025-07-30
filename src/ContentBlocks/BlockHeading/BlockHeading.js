@@ -22,7 +22,7 @@ export default function BlockHeading({ content, strong, size, icon }) {
     : null;
 
   return (
-    <Box>
+    <Box direction="row" gap="small">
       {iconElement}
       <Headline {...headlineProps}>
         {unescapedContent}
