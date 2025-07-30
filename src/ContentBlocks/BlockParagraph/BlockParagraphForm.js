@@ -6,6 +6,7 @@ import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 import Select from 'grommet/components/Select';
 import { MarkdownHelpButton } from '../Shared';
+import iconMap from '../BlockButton/iconMap';
 
 export class ParagraphForm extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export class ParagraphForm extends Component {
       align: props.align || 'start',
       scrollable: props.scrollable || "no",
       scrollableHeight: props.scrollableHeight || "medium",
+      icon: props.icon || 'none',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -43,7 +45,7 @@ export class ParagraphForm extends Component {
   }
 
   render() {
-    const { content, align, scrollable, scrollableHeight, paragraphSize } = this.state;
+    const { content, align, scrollable, scrollableHeight, paragraphSize, icon } = this.state;
 
     return (
       <Box colorIndex="light-2" pad="medium">
@@ -65,6 +67,18 @@ export class ParagraphForm extends Component {
                   <Select value={scrollableHeight || "medium"} onChange={this.onChange} options={['small', 'medium', 'large']} name="scrollableHeight" id="scrollableHeight" />
                 </FormField>
               )}
+                 <FormField
+                label="Icon"
+                htmlFor="icon"
+              >
+                <Select
+                  onChange={this.onChange}
+                  value={icon || 'none'}
+                  options={['none', ...Object.keys(iconMap)]}
+                  name="icon"
+                  id="icon"
+                />
+              </FormField>
               <FormField
                 label="Align Content"
                 htmlFor="align"
@@ -123,6 +137,7 @@ ParagraphForm.propTypes = {
     'center',
     'end',
   ]),
+  icon: PropTypes.string,
 };
 
 export default ParagraphForm;
