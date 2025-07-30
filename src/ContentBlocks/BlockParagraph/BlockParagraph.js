@@ -5,10 +5,18 @@ import unescape from 'unescape';
 import { sizing } from './sizing';
 import { ScrollableBox } from './styles';
 
-export default function BlockParagraph({ scrollable, scrollableHeight, content, align, paragraphSize }) {
+export default function BlockParagraph({ scrollable, scrollableHeight, content, align, paragraphSize, paragraphColor }) {
   const markdownContent = unescape(content || '');
   const textSize = paragraphSize || 'medium';
-  const markdownComponents = sizing(textSize, align);
+  let color;
+  if (paragraphColor === "light") {
+    color = "#7D8A92";
+  } else if (paragraphColor === "dark") {
+    color = "#000000"
+  } else {
+    color = "inherit"
+  }
+  const markdownComponents = sizing(textSize, align, color);
   if (scrollable === "yes") {
     return (
       <ScrollableBox size={{ height: scrollableHeight, width: 'inherit' }}>
@@ -47,6 +55,11 @@ BlockParagraph.propTypes = {
     'small',
     'medium',
     'large',
+  ]),
+  paragraphColor: PropTypes.oneOf([
+    'light',
+    'normal',
+    'dark',
   ]),
 };
 
