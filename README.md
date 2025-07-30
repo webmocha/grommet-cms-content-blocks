@@ -52,10 +52,16 @@ yarn unlink grommet-cms-content-blocks
 1. To deploy the project run:
 
 ```bash
+make build 
+```
+
+This will build the project.  If this generates a new output `dist/index.js`, please commit the file and add a relevant message.  **If there is no change in the built file continue to the next step.**
+
+```bash
 make deploy
 ```
 
-This will build the project, bump the version, and push the changes and tags to github
+This will bump the version, create a commit message for updating the version, and push the changes and tags to github
 
 2.  Install the deployed project 
 

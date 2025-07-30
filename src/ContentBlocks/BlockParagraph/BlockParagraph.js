@@ -14,11 +14,20 @@ export default function BlockParagraph({
   content,
   align,
   paragraphSize,
+  paragraphColor,
   icon,
 }) {
   const markdownContent = unescape(content || '');
   const textSize = paragraphSize || 'medium';
-  const markdownComponents = sizing(textSize, align);
+  let color;
+  if (paragraphColor === "light") {
+    color = "#7D8A92";
+  } else if (paragraphColor === "dark") {
+    color = "#000000"
+  } else {
+    color = "inherit"
+  }
+  const markdownComponents = sizing(textSize, align, color);
   
   const iconElement = icon && icon !== 'none' 
     ? ['do', 'doNot', 'limitedUse'].includes(icon)
@@ -68,6 +77,11 @@ BlockParagraph.propTypes = {
     'small',
     'medium',
     'large',
+  ]),
+  paragraphColor: PropTypes.oneOf([
+    'light',
+    'normal',
+    'dark',
   ]),
   icon: PropTypes.string,
 };

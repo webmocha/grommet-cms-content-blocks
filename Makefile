@@ -28,13 +28,17 @@ dev:
 	yarn link 
 	@echo $(DONE)
 
-## dev: Runs everything you need to develop api and cms
-.SILENT: deploy 
-deploy:
+## deploy: bumps new version, creates and pushes tag 
+.SILENT: build 
+build:
 	@echo "Installing dependencies"
 	$(MAKE) install
 	@echo "Building new package"
 	yarn build 
+
+## deploy: bumps new version, creates and pushes tag 
+.SILENT: deploy 
+deploy:
 	@echo "Bumping version and creating new tag"
 	yarn shipit 
 	@echo $(DONE)
