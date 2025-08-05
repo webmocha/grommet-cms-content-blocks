@@ -23,7 +23,9 @@ export default function BlockHeading({ content, strong, size, icon }) {
 
   return (
     <Box direction="row" align="start" gap="small">
-      {iconElement}
+      <Box pad={{ vertical: 'small' }}>
+        {iconElement}
+      </Box>
       <Headline {...headlineProps}>
         {unescapedContent}
       </Headline>

@@ -20,16 +20,16 @@ export default function BlockParagraph({
   const markdownContent = unescape(content || '');
   const textSize = paragraphSize || 'medium';
   let color;
-  if (paragraphColor === "light") {
-    color = "#7D8A92";
-  } else if (paragraphColor === "dark") {
-    color = "#000000"
+  if (paragraphColor === 'light') {
+    color = '#7D8A92';
+  } else if (paragraphColor === 'dark') {
+    color = '#000000';
   } else {
-    color = "inherit"
+    color = 'inherit';
   }
   const markdownComponents = sizing(textSize, align, color);
-  
-  const iconElement = icon && icon !== 'none' 
+
+  const iconElement = icon && icon !== 'none'
     ? ['do', 'doNot', 'limitedUse'].includes(icon)
       ? <IconSpan color={colorMap[icon]}><IconPicker icon={icon} /></IconSpan>
       : <IconPicker icon={icon} />
@@ -38,7 +38,9 @@ export default function BlockParagraph({
   if (scrollable === 'yes') {
     return (
       <ScrollableBox size={{ height: scrollableHeight, width: 'inherit' }}>
-        {iconElement}
+        <Box pad={{ vertical: 'small' }}>
+          {iconElement}
+        </Box>
         <Markdown
           content={markdownContent}
           components={markdownComponents}
@@ -48,7 +50,9 @@ export default function BlockParagraph({
   }
   return (
     <Box direction="row" align="start" gap="small">
-      {iconElement}
+      <Box pad={{ vertical: 'small' }}>
+        {iconElement}
+      </Box>
       <Markdown
         content={markdownContent}
         components={markdownComponents}
