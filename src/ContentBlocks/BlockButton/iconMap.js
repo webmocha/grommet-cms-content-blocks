@@ -14,6 +14,7 @@ import DownloadIcon from 'grommet/components/icons/base/Download';
 import FormCheckmarkIcon from 'grommet/components/icons/base/FormCheckmark';
 import FormSubtractIcon from 'grommet/components/icons/base/FormSubtract';
 import FormCloseIcon from 'grommet/components/icons/base/FormClose';
+import DocumentPpt from 'grommet/components/icons/base/DocumentPpt';
 
 export default {
   primary: <LinkNextIcon />,
@@ -30,4 +31,5 @@ export default {
   'do': <FormCheckmarkIcon />,
   'limitedUse': <FormSubtractIcon />,
   'doNot': <FormCloseIcon />,
+  'pdf': <DocumentPpt />,
 };

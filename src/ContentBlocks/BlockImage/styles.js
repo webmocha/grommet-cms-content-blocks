@@ -32,8 +32,6 @@ export const spanStyles = (color) => css`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
   border-radius: 50%;
   background: ${color || '#eee'};
   margin-bottom: 8px;

@@ -1,4 +1,4 @@
-export const sizing = (textSize, align) => ({
+export const sizing = (textSize, align, color) => ({
   a: {
     props: {
       target: '_blank',
@@ -11,6 +11,7 @@ export const sizing = (textSize, align) => ({
       align,
       style: {
         marginTop: 0,
+        color,
       },
     },
   },
@@ -20,6 +21,7 @@ export const sizing = (textSize, align) => ({
       align,
       style: {
         marginTop: 0,
+        color,
       },
     },
   },
@@ -29,6 +31,7 @@ export const sizing = (textSize, align) => ({
       align,
       style: {
         marginTop: 0,
+        color,
       },
     },
   },
@@ -38,6 +41,7 @@ export const sizing = (textSize, align) => ({
       align,
       style: {
         marginTop: 0,
+        color,
       },
     },
   },
@@ -47,6 +51,7 @@ export const sizing = (textSize, align) => ({
       align,
       style: {
         marginTop: 0,
+        color,
       },
     },
   },
@@ -56,6 +61,7 @@ export const sizing = (textSize, align) => ({
       align,
       style: {
         marginTop: 0,
+        color,
       },
     },
   },
