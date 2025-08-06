@@ -5,6 +5,7 @@ import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 import Select from 'grommet/components/Select';
+import iconMap from '../BlockButton/iconMap';
 
 export class HeadingForm extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export class HeadingForm extends Component {
     this.state = {
       content: props.content || '',
       size: props.size || 'Medium',
-      strong: props.strong || 'False'
+      strong: props.strong || 'False',
+      icon: props.icon || 'none'
     };
 
     this._onChange = this._onChange.bind(this);
@@ -36,7 +38,7 @@ export class HeadingForm extends Component {
   }
 
   render() {
-    const { content, strong, size } = this.state;
+    const { content, strong, size, icon } = this.state;
     
     return (
       <Box colorIndex="light-2" pad="medium">
@@ -70,6 +72,15 @@ export class HeadingForm extends Component {
                   onChange={this._onChange}
                 />
               </FormField>
+              <FormField label="Icon" htmlFor="icon">
+                <Select
+                  id="icon"
+                  inline={false}
+                  options={['none', ...Object.keys(iconMap)]}
+                  value={icon}
+                  onChange={this._onChange}
+                />
+              </FormField>
             </fieldset>
             <Button onClick={this._onSubmit} primary={false} type="submit"
               label="Done" />
@@ -82,7 +93,8 @@ export class HeadingForm extends Component {
 
 HeadingForm.propTypes = {
   content: PropTypes.string,
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  icon: PropTypes.string,
 };
 
 export default HeadingForm;
