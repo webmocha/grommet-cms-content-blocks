@@ -12,12 +12,12 @@ import TrashIcon from 'grommet/components/icons/base/Trash';
 import PreviousIcon from 'grommet/components/icons/base/Previous';
 import NextIcon from 'grommet/components/icons/base/Next';
 
-export class RelatedContentForm extends Component {
+export class ExternaLinksForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       width: props.width || "medium",
-      size: props.width || "small",
+      size: props.width || "medium",
       links: props.links|| [{ label: "", href: "" }],
       activeTabIndex: 0,
     };
@@ -155,7 +155,7 @@ export class RelatedContentForm extends Component {
   }
 }
 
-RelatedContentForm.propTypes = {
+ExternaLinksForm.propTypes = {
   links: PropTypes.array,
   onDataChange: PropTypes.func,
   onAdd: PropTypes.func,
@@ -163,4 +163,4 @@ RelatedContentForm.propTypes = {
   onSubmit: PropTypes.func,
 };
 
-export default RelatedContentForm;
+export default ExternaLinksForm;

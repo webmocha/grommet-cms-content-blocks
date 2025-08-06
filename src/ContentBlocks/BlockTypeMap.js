@@ -1,5 +1,9 @@
 import React from "react";
 import {
+  BlockExternaLinks,
+  BlockExternaLinksForm,
+  BlockExternaLinksWireFrame,
+  BlockExternalLinksPreview,
   BlockHeading,
   BlockHeadingWireframe,
   BlockRelatedContent,
@@ -105,6 +109,13 @@ export default {
     form: <BlockHeadingForm />,
     name: "Headline",
     wireframe: <BlockHeadingWireframe />,
+  },
+  BlockExternaLinks: {
+    element: <BlockExternaLinks />,
+    preview: <GenericPreview />,
+    form: <BlockExternaLinksForm/>,
+    name: "External Links",
+    wireframe: <BlockExternaLinksWireFrame />,
   },
   BlockRelatedContent: {
     element: <BlockRelatedContent />,
