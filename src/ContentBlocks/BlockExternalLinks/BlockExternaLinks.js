@@ -1,11 +1,11 @@
 import React, { PropTypes } from "react";
 import Box from "grommet/components/Box";
 import Paragraph from "grommet/components/Paragraph";
-import { StyledBox, StyledAnchor, StyledHeading } from "./styles";
+import { StyledBox, StyledAnchor, StyledHeading, StyledContainer } from "./styles";
 
 export default function BlockExternaLinks({ links }) {
   return (
-    <Box pad="medium" size="medium">
+    <StyledContainer pad="large">
       {links &&
         links.map(({ href, label }, index) => (
           <StyledBox>
@@ -16,7 +16,7 @@ export default function BlockExternaLinks({ links }) {
             </StyledAnchor>
           </StyledBox>
         ))}
-    </Box>
+    </StyledContainer>
   );
 }
 
