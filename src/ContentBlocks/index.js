@@ -3,6 +3,7 @@ export * from "./BlockColorSwatch";
 export * from "./BlockCard";
 export * from "./BlockCarousel";
 export * from "./BlockCustomComponent";
+export * from "./BlockExternalLinks";
 export * from "./BlockHeading";
 export * from "./BlockRelatedContent";
 export * from "./BlockIframe";
