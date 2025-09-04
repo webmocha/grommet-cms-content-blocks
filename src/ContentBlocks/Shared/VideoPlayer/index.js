@@ -293,7 +293,7 @@ export default class Video extends Component {
           });
         }}>
         <video ref={el => this._video = el} {...restProps}
-          poster={poster} autoPlay={autoPlay ? 'autoplay' : false}
+          poster={poster ? poster : undefined} autoPlay={autoPlay ? 'autoplay' : false}
           loop={loop ? 'loop' : false} muted={muted} {...this._mediaEventProps}>
           {this.props.children}
         </video>
