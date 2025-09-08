@@ -25,7 +25,7 @@ export default function VideoLayer({ video, onClose, image }) {
             allowFullScreen={!isIE}
             size="large"
             autoPlay
-            poster={image.path}
+            poster={image ? image.path : undefined}
             title={video.title}
             full
           >
@@ -43,6 +43,6 @@ VideoLayer.propTypes = {
   }).isRequired,
   image: PropTypes.shape({
     path: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   onClose: PropTypes.func.isRequired,
 };
