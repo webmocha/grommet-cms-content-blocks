@@ -6,6 +6,7 @@ import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 import Select from 'grommet/components/Select';
+import iconMap from '../BlockButton/iconMap';
 import type { OnChangeEvent, Asset } from '../../types';
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
   label: ?string,
   video: ?string,
   url: ?string,
+  icon: ?string,
   onChange: ?(e: OnChangeEvent) => void,
   onSubmit: ?(e: SyntheticInputEvent) => void,
   children: HTMLElement,
@@ -25,6 +27,7 @@ type State = {
   label: ?string,
   video: ?Asset,
   borderColor: string,
+  icon: string,
 };
 
 export class BlockVideoForm extends Component {
@@ -41,6 +44,7 @@ export class BlockVideoForm extends Component {
       video: props.video || '',
       label: props.label || '',
       borderColor: props.borderColor || 'none',
+      icon: props.icon || 'none',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -98,7 +102,7 @@ export class BlockVideoForm extends Component {
   props: Props;
 
   render() {
-    const { image, content, label, video, borderColor } = this.state;
+    const { image, content, label, video, borderColor, icon } = this.state;
     const { children } = this.props;
     const submit = (BlockVideoForm.validateForm(this.state))
       ? this.onSubmit
@@ -153,6 +157,16 @@ export class BlockVideoForm extends Component {
                   onChange={this.onChange}
                 />
               </FormField>
+              <FormField label="Icon" htmlFor="icon">
+                <Select
+                  id="icon"
+                  name="icon"
+                  inline={false}
+                  options={['none', ...Object.keys(iconMap)]}
+                  value={icon || 'none'}
+                  onChange={this.onChange}
+                />
+              </FormField>
               {children && children}
             </fieldset>
             <Button
@@ -176,6 +190,7 @@ BlockVideoForm.propTypes = {
   borderColor: PropTypes.string,
   video: PropTypes.string,
   label: PropTypes.string,
+  icon: PropTypes.string,
 };
 
 export default BlockVideoForm;
