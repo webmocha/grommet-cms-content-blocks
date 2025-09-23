@@ -4,9 +4,7 @@ import Box from 'grommet/components/Box';
 import unescape from 'unescape';
 import { sizing } from './sizing';
 import { ScrollableBox } from './styles';
-import IconPicker from '../BlockButton/iconPicker';
-import IconSpan from '../BlockImage/iconSpan';
-import colorMap from '../BlockImage/colorMap';
+import ConditionalIcon from '../Shared/ConditionalIcon';
 
 export default function BlockParagraph({
   scrollable,
@@ -29,11 +27,7 @@ export default function BlockParagraph({
   }
   const markdownComponents = sizing(textSize, align, color);
 
-  const iconElement = icon && icon !== 'none'
-    ? ['do', 'doNot', 'limitedUse'].includes(icon)
-      ? <IconSpan color={colorMap[icon]}><IconPicker icon={icon} /></IconSpan>
-      : <IconPicker icon={icon} />
-    : null;
+  const iconElement = <ConditionalIcon icon={icon} />;
 
   if (scrollable === 'yes') {
     return (

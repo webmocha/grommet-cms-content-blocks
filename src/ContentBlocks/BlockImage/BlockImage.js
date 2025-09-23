@@ -4,8 +4,7 @@ import { BlockParagraph } from '../BlockParagraph';
 import colorMap from './colorMap';
 import Div from './div';
 import Image from './image';
-import IconPicker from '../BlockButton/iconPicker';
-import IconSpan from './iconSpan';
+import ConditionalIcon from '../Shared/ConditionalIcon';
 
 
 export default function BlockImage({ content, alt, image, borderColor, link, title, icon }) {
@@ -13,11 +12,8 @@ export default function BlockImage({ content, alt, image, borderColor, link, tit
   const caption = (unescapedContent && unescapedContent !== '')
     ? <BlockParagraph content={content} />
     : '';
-  const heading = (icon && icon !== 'none')
-    ? (<IconSpan color={colorMap[icon]}>
-      <IconPicker icon={icon} />
-      </IconSpan>)
-    : (title ? <BlockParagraph content={title} /> : '')
+  const iconElement = <ConditionalIcon icon={icon} />;
+  const heading = iconElement || (title ? <BlockParagraph content={title} /> : '');
   const path = image && image.path ? image.path : '';
   const color = (borderColor && borderColor !== 'none') ? colorMap[borderColor] : '';
   if (path === '') {
