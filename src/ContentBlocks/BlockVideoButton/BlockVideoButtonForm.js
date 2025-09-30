@@ -57,6 +57,15 @@ type Props = {
   data?: Object
 };
 
+const getFileExtension = path => {
+  const baseName = path.split(/[\\/]/).pop();
+  const pos = baseName.lastIndexOf(".");
+  return pos > 0 ? baseName.slice(pos + 1).toLowerCase() : "";
+};
+
+const videoExtensions = new Set(["mp4", "mov", "avi", "webm", "mkv"]);
+
+const isVideoFile = path => videoExtensions.has(getFileExtension(path));
 export default class BlockVideoButtonForm extends React.Component {
   static defaultProps = {
     pad: false,
@@ -154,7 +163,7 @@ export default class BlockVideoButtonForm extends React.Component {
       ? null
       : 'Please enter a valid label';
 
-    const videoError = (video && video.path && video.path.length > 0)
+    const videoError = (video && video.path && isVideoFile(video.path))
       ? null
       : 'Please select a video file';
 
