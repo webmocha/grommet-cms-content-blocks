@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Box from 'grommet/components/Box';
 import { VideoCallout, VideoLayer } from '../Shared';
+import ConditionalIcon from '../Shared/ConditionalIcon';
 
 export default class BlockVideo extends Component {
   constructor(props) {
@@ -20,7 +21,8 @@ export default class BlockVideo extends Component {
   }
 
   render() {
-    const { content, image, label, video, borderColor } = this.props;
+    const { content, image, label, video, borderColor, icon } = this.props;
+    const iconElement = <ConditionalIcon icon={icon} />;
     const videoLayer = (this.state.layerActive)
       ? (
         <VideoLayer
@@ -33,15 +35,18 @@ export default class BlockVideo extends Component {
 
     return (
       <Box>
+        <Box align="start" pad={{ vertical: 'small' }}>
+        {iconElement}
+        </Box>
         {videoLayer}
-        <VideoCallout
-          borderColor={borderColor}
-          video={video}
-          description={content}
-          label={label}
-          thumbnail={image.path}
-          onClick={this.toggleVideoLayer}
-        />
+          <VideoCallout
+            borderColor={borderColor}
+            video={video}
+            description={content}
+            label={label}
+            thumbnail={image.path}
+            onClick={this.toggleVideoLayer}
+          />
       </Box>
     );
   }
@@ -57,4 +62,5 @@ BlockVideo.propTypes = {
   video: PropTypes.shape({
     path: PropTypes.string.isRequired,
   }),
+  icon: PropTypes.string,
 };
