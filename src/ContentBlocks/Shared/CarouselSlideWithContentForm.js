@@ -27,7 +27,7 @@ class CarouselSlideWithContentForm extends Component {
     this.state = {
       image: props.data ? props.data.image : '',
       content: props.data ? props.data.content : '',
-      button: props.data ? props.data.button : { path: '', label: '', icon: props.data.button.icon || 'primary', newTab: props.data.button.newTab || false },
+      button: props.data ? props.data.button : { path: '', label: '', icon: props.data.button.icon || 'primary', newTab: props.data.button.newTab || false, buttonColor: props.data.button.buttonColor || 'black' },
       update: props.data ? props.data.update : { date: '', description: '' },
       imageSize: props.imageSize ? props.imageSize : 'Full',
       justification: (props.data && props.data.justification) ? props.data.justification : 'left',
@@ -112,7 +112,7 @@ class CarouselSlideWithContentForm extends Component {
           [key]: val,
         },
       });
-    } else if (key === 'label' || key === 'path' || key === 'icon' || key === "newTab") {
+    } else if (key === 'label' || key === 'path' || key === 'icon' || key === "newTab" || key === "buttonColor") {
       this.setState({
         button: {
           ...this.state.button,
@@ -133,7 +133,7 @@ class CarouselSlideWithContentForm extends Component {
       color: props.data ? props.data.color : 'black',
       justification: props.data ? props.data.justification : 'left',
       content: props.data ? props.data.content : '',
-      button: props.data ? props.data.button : { path: '', label: '', icon: '', newTab: false },
+      button: props.data ? props.data.button : { path: '', label: '', icon: '', newTab: false, buttonColor: 'black' },
       update: props.data ? props.data.update : { date: '', description: '' },
     });
   }
@@ -267,6 +267,15 @@ class CarouselSlideWithContentForm extends Component {
                     id="icon"
                   />
                 </FormField>
+              <FormField label="Button Color" htmlFor="buttonColor">
+                <Select
+                  onChange={this.onChange}
+                  value={button ? button.buttonColor || 'black' : 'black'}
+                  options={['black', 'white', 'green']}
+                  name="buttonColor"
+                  id="buttonColor"
+                />
+              </FormField>
               <FormField>
                 <CheckBox
                   onChange={this.onChange}
