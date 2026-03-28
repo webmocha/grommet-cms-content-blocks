@@ -2,9 +2,23 @@
 import React from 'react';
 import Button from 'grommet/components/Button';
 import Anchor from 'grommet/components/Anchor';
+import styled from 'styled-components';
 import type { AssetType, ButtonType, IconType } from './BlockButtonForm';
 import { getAnalyticsType, getLink } from './utils';
 import IconPicker from './iconPicker';
+
+const colorMap = {
+  black: '#333333',
+  white: '#ffffff',
+  green: '#00a982',
+};
+
+const StyledButtonWrapper = styled.div`
+  button.grommetux-button {
+    border-color: ${props => colorMap[props.buttonColor] || colorMap.black};
+    color: ${props => colorMap[props.buttonColor] || colorMap.black};
+  }
+`;
 
 export type Props = {
   label?: string,
@@ -14,6 +28,7 @@ export type Props = {
   buttonType?: ButtonType,
   primary?: boolean,
   icon?: IconType,
+  buttonColor?: string,
 }
 export default function BlockButton({
   buttonType = 'Button',
@@ -23,6 +38,7 @@ export default function BlockButton({
   primary = 'False',
   assetType,
   icon,
+  buttonColor = 'black',
 }: Props) {
   const isPrimary = primary === 'True';
   const link = getLink(assetType, path, href);
@@ -35,7 +51,9 @@ export default function BlockButton({
   let props = { label, primary: isPrimary, target: '_blank', ...tracking, ...link };
   if (buttonType === 'Button') {
     return (
-      <Button {...props} />
+      <StyledButtonWrapper buttonColor={buttonColor}>
+        <Button {...props} />
+      </StyledButtonWrapper>
     );
   } else if (buttonType === 'Anchor') {
     if (icon && isPrimary) {
